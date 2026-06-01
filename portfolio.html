@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Najat Ibrahim — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+    :root{
+      --bg:        #100A0B;
+      --surface:   #160D0F;
+      --surface2:  #1E1214;
+      --surface3:  #261619;
+      --maroon:    #6B1A2A;
+      --rose:      #9B3048;
+      --blush:     #C4687E;
+      --cream:     #F5EDE8;
+      --muted:     #9E8880;
+      --border:    rgba(107,26,42,0.28);
+      --glow:      rgba(107,26,42,0.22);
+      --serif:     'Cormorant Garamond', Georgia, serif;
+      --sans:      'DM Sans', sans-serif;
+    }
+
+    html{scroll-behavior:smooth}
+    body{
+      background:var(--bg);color:var(--cream);
+      font-family:var(--sans);font-weight:300;
+      line-height:1.7;overflow-x:hidden;
+    }
+    ::-webkit-scrollbar{width:3px}
+    ::-webkit-scrollbar-track{background:var(--bg)}
+    ::-webkit-scrollbar-thumb{background:var(--maroon)}
+
+    /* ── NAV ── */
+    nav{
+      position:fixed;top:0;left:0;right:0;z-index:100;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:1.1rem 4rem;
+      background:rgba(16,10,11,0.88);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-logo{
+      display:flex;align-items:center;gap:0.65rem;
+      text-decoration:none;
+    }
+    .nav-logo img{
+      height:36px;width:36px;object-fit:contain;
+      border-radius:4px;
+    }
+    .nav-name{
+      font-family:var(--serif);font-size:1.1rem;font-weight:500;
+      color:var(--cream);letter-spacing:0.04em;
+    }
+    .nav-links{display:flex;gap:2.4rem;list-style:none;align-items:center}
+    .nav-links a{
+      font-size:0.76rem;letter-spacing:0.16em;text-transform:uppercase;
+      color:var(--muted);text-decoration:none;transition:color 0.2s;
+    }
+    .nav-links a:hover{color:var(--blush)}
+
+    /* ── HERO ── */
+    .hero{
+      min-height:100vh;
+      display:grid;grid-template-columns:1.1fr 0.9fr;
+      align-items:center;padding:0 4rem;gap:2rem;
+      position:relative;overflow:hidden;
+    }
+    .hero::before{
+      content:'';position:absolute;
+      width:700px;height:700px;border-radius:50%;
+      background:radial-gradient(circle,rgba(107,26,42,0.28) 0%,transparent 68%);
+      right:-140px;top:50%;transform:translateY(-50%);
+      pointer-events:none;
+    }
+    .hero-text{padding-top:4.5rem;position:relative;z-index:1}
+    .hero-eyebrow{
+      font-size:0.7rem;letter-spacing:0.26em;text-transform:uppercase;
+      color:var(--blush);margin-bottom:1.3rem;
+      display:flex;align-items:center;gap:0.8rem;
+    }
+    .hero-eyebrow::before{
+      content:'';display:inline-block;
+      width:28px;height:1px;background:var(--blush);
+    }
+    .hero-title{
+      font-family:var(--serif);
+      font-size:clamp(3rem,5vw,4.8rem);
+      font-weight:300;line-height:1.05;
+      color:var(--cream);margin-bottom:1.8rem;
+      letter-spacing:-0.01em;
+    }
+    .hero-title em{font-style:italic;color:var(--blush)}
+    .hero-sub{
+      font-size:0.95rem;color:var(--muted);
+      max-width:44ch;margin-bottom:0.9rem;line-height:1.9;
+    }
+    .hero-meta{
+      font-size:0.78rem;color:var(--muted);margin-bottom:2.8rem;
+      display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap;
+    }
+    .hero-meta .dot{
+      width:3px;height:3px;border-radius:50%;
+      background:var(--maroon);display:inline-block;
+    }
+    .hero-meta span{color:var(--blush)}
+    .hero-btns{display:flex;gap:1rem}
+
+    .btn{
+      display:inline-block;padding:0.72rem 2rem;
+      font-size:0.76rem;font-weight:500;letter-spacing:0.12em;
+      text-transform:uppercase;text-decoration:none;cursor:pointer;
+      border:1px solid var(--maroon);color:var(--cream);background:transparent;
+      transition:all 0.28s;
+    }
+    .btn:hover{background:var(--maroon);border-color:var(--maroon);
+      box-shadow:0 0 28px rgba(107,26,42,0.4)}
+    .btn-fill{background:var(--maroon)}
+    .btn-fill:hover{background:var(--rose);border-color:var(--rose)}
+
+    /* Hero Photo */
+    .hero-visual{
+      display:flex;align-items:flex-end;justify-content:center;
+      padding-top:4.5rem;position:relative;z-index:1;
+    }
+    .photo-outer{
+      position:relative;
+      width:340px;
+    }
+    /* offset decorative border */
+    .photo-outer::before{
+      content:'';position:absolute;
+      top:14px;left:14px;
+      width:100%;height:calc(100% - 0px);
+      border:1px solid var(--maroon);
+      pointer-events:none;z-index:0;
+    }
+    /* top-left bracket */
+    .photo-outer::after{
+      content:'';position:absolute;
+      top:-7px;left:-7px;
+      width:40px;height:40px;
+      border-top:2px solid var(--cream);
+      border-left:2px solid var(--cream);
+      z-index:3;
+    }
+    .photo-inner{
+      position:relative;z-index:1;
+      width:100%;overflow:hidden;
+      background:var(--surface);
+    }
+    .photo-inner img{
+      width:100%;display:block;
+      object-fit:cover;object-position:top;
+    }
+    /* bottom-right bracket */
+    .bracket-br{
+      position:absolute;bottom:-7px;right:-7px;
+      width:40px;height:40px;
+      border-bottom:2px solid var(--cream);
+      border-right:2px solid var(--cream);
+      z-index:3;
+    }
+    /* floating label */
+    .photo-label{
+      position:absolute;
+      bottom:32px;left:-22px;z-index:4;
+      background:var(--maroon);
+      color:var(--cream);
+      font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;
+      padding:0.38rem 0.9rem;white-space:nowrap;
+    }
+    /* glow pool */
+    .photo-glow{
+      position:absolute;bottom:-24px;left:50%;
+      transform:translateX(-50%);
+      width:70%;height:36px;
+      background:var(--maroon);
+      filter:blur(30px);opacity:0.45;z-index:0;
+    }
+
+    /* ── THIN RULE ── */
+    .rule{
+      height:1px;margin:0;
+      background:linear-gradient(90deg,transparent 0%,var(--maroon) 40%,var(--maroon) 60%,transparent 100%);
+      opacity:0.4;
+    }
+
+    /* ── SECTIONS ── */
+    section{padding:6.5rem 4rem}
+    .sec-label{
+      font-size:0.68rem;letter-spacing:0.26em;text-transform:uppercase;
+      color:var(--blush);margin-bottom:0.9rem;
+      display:flex;align-items:center;gap:0.7rem;
+    }
+    .sec-label::before{
+      content:'';width:20px;height:1px;background:var(--blush);
+    }
+    .sec-title{
+      font-family:var(--serif);
+      font-size:clamp(2rem,3.2vw,3rem);
+      font-weight:300;line-height:1.12;
+      color:var(--cream);margin-bottom:0.8rem;
+    }
+    .sec-title em{font-style:italic;color:var(--blush)}
+    .rule-short{
+      width:36px;height:1px;background:var(--blush);
+      margin:1.4rem 0 2.2rem;
+    }
+
+    /* ── ABOUT ── */
+    #about{
+      background:var(--surface);
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:5.5rem;align-items:start;
+    }
+    .about-text{font-size:0.92rem;color:var(--muted);line-height:1.95}
+    .about-text p+p{margin-top:1rem}
+    .about-text strong{color:var(--blush);font-weight:500}
+    .stats{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:1.6rem;margin-bottom:2.8rem;
+    }
+    .stat{border-left:2px solid var(--maroon);padding-left:1rem}
+    .stat-n{
+      font-family:var(--serif);font-size:2.4rem;
+      font-weight:300;color:var(--cream);line-height:1;
+    }
+    .stat-l{
+      font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;
+      color:var(--muted);margin-top:0.15rem;
+    }
+    .certs{display:flex;flex-direction:column;gap:0.8rem;margin-top:0.5rem}
+    .cert{
+      display:flex;align-items:flex-start;gap:0.8rem;
+      padding:0.9rem 1.1rem;
+      background:var(--surface2);
+      border:1px solid var(--border);
+    }
+    .cert-dot{
+      width:6px;height:6px;border-radius:50%;
+      background:var(--blush);flex-shrink:0;margin-top:0.45rem;
+    }
+    .cert-t{font-size:0.85rem;color:var(--cream);font-weight:500}
+    .cert-s{font-size:0.74rem;color:var(--muted);margin-top:0.1rem}
+    .edu{
+      margin-top:1.4rem;
+      padding:1.4rem;
+      background:var(--surface2);border:1px solid var(--border);
+    }
+    .edu-school{
+      font-family:var(--serif);font-size:1.15rem;color:var(--cream);font-weight:400;
+    }
+    .edu-deg{font-size:0.82rem;color:var(--blush);margin-top:0.2rem}
+    .edu-yr{font-size:0.74rem;color:var(--muted);margin-top:0.12rem}
+
+    /* ── PROJECTS ── */
+    #projects{background:var(--bg)}
+    .proj-header{
+      display:flex;align-items:flex-end;justify-content:space-between;
+      margin-bottom:3rem;
+    }
+    .proj-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      gap:1.5px;background:var(--border);
+    }
+    .proj-card{background:var(--surface);cursor:pointer;overflow:hidden}
+    .proj-thumb{aspect-ratio:4/3;overflow:hidden;position:relative}
+    .proj-thumb img,.proj-thumb video{
+      width:100%;height:100%;object-fit:cover;display:block;
+      transition:transform 0.55s cubic-bezier(.25,.46,.45,.94);
+    }
+    .proj-card:hover .proj-thumb img,
+    .proj-card:hover .proj-thumb video{transform:scale(1.05)}
+    .proj-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(to top,rgba(16,10,11,0.82) 0%,transparent 55%);
+      opacity:0;transition:opacity 0.3s;
+      display:flex;align-items:flex-end;padding:1rem;
+    }
+    .proj-card:hover .proj-overlay{opacity:1}
+    .ov-hint{font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--blush)}
+    .proj-tag{
+      position:absolute;top:0.75rem;left:0.75rem;
+      font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;
+      padding:0.25rem 0.65rem;
+      background:var(--maroon);color:var(--cream);
+    }
+    .proj-info{padding:1.3rem 1.4rem 1.7rem}
+    .proj-name{
+      font-family:var(--serif);font-size:1.2rem;font-weight:400;
+      color:var(--cream);margin-bottom:0.28rem;
+    }
+    .proj-desc{font-size:0.8rem;color:var(--muted);line-height:1.7}
+    /* video play badge */
+    .play-ring{
+      position:absolute;top:50%;left:50%;
+      transform:translate(-50%,-50%);
+      width:42px;height:42px;border-radius:50%;
+      background:rgba(107,26,42,0.82);
+      display:flex;align-items:center;justify-content:center;
+      transition:opacity 0.3s;
+    }
+    .play-ring svg{width:16px;height:16px;fill:var(--cream);margin-left:2px}
+    .proj-card:hover .play-ring{opacity:0}
+
+    /* ── SKILLS ── */
+    #skills{background:var(--surface)}
+    .skills-wrap{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:5rem;align-items:start;
+    }
+    .sg{
+      display:grid;grid-template-columns:1fr 1fr;
+      gap:1px;background:var(--border);margin-top:2.5rem;
+    }
+    .sc{
+      background:var(--surface2);padding:1.6rem 1.4rem;
+      transition:background 0.2s;
+    }
+    .sc:hover{background:var(--surface3)}
+    .sc-title{
+      font-family:var(--serif);font-size:1.1rem;font-weight:400;
+      color:var(--cream);margin-bottom:0.5rem;
+    }
+    .sc-list{list-style:none;font-size:0.78rem;color:rgba(245,237,232,0.45);line-height:2.1}
+    .tools-lbl{
+      font-size:0.67rem;letter-spacing:0.2em;text-transform:uppercase;
+      color:var(--muted);margin:2.2rem 0 1rem;
+    }
+    .tools{display:flex;flex-wrap:wrap;gap:0.6rem}
+    .pill{
+      font-size:0.74rem;padding:0.34rem 0.95rem;
+      border:1px solid var(--border);color:var(--muted);
+      border-radius:100px;transition:border-color 0.2s,color 0.2s;
+    }
+    .pill:hover{border-color:var(--blush);color:var(--blush)}
+    /* right col: current project card */
+    .cp-card{
+      background:var(--surface2);border:1px solid var(--border);
+      padding:1.8rem;margin-top:2.5rem;
+    }
+    .cp-title{
+      font-family:var(--serif);font-size:1.25rem;color:var(--cream);
+      font-weight:400;margin-bottom:0.4rem;
+    }
+    .cp-role{font-size:0.8rem;color:var(--blush);margin-bottom:0.9rem}
+    .cp-body{font-size:0.84rem;color:var(--muted);line-height:1.85}
+
+    /* ── FOOTER ── */
+    footer{
+      background:var(--bg);
+      padding:4rem;
+      display:flex;align-items:center;justify-content:space-between;
+      border-top:1px solid var(--border);
+    }
+    .ft-name{font-family:var(--serif);font-size:1.4rem;color:var(--cream);font-weight:400}
+    .ft-tag{font-size:0.78rem;color:var(--muted);margin-top:0.2rem}
+    .ft-copy{font-size:0.68rem;color:rgba(158,136,128,0.4);margin-top:0.4rem}
+    .ft-email{
+      font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;
+      color:var(--blush);text-decoration:none;
+      border-bottom:1px solid var(--maroon);padding-bottom:2px;
+      transition:color 0.2s;
+    }
+    .ft-email:hover{color:var(--cream)}
+
+    /* ── FADE ── */
+    .fu{opacity:0;transform:translateY(24px);
+      transition:opacity 0.7s ease,transform 0.7s ease}
+    .fu.vis{opacity:1;transform:translateY(0)}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:960px){
+      nav{padding:1rem 1.6rem}
+      .hero{grid-template-columns:1fr;padding:7rem 1.8rem 3.5rem;gap:0}
+      .hero-visual{display:none}
+      section{padding:5rem 1.8rem}
+      #about{grid-template-columns:1fr;gap:3rem}
+      .proj-grid{grid-template-columns:1fr 1fr}
+      .skills-wrap{grid-template-columns:1fr;gap:2.5rem}
+      footer{flex-direction:column;gap:1.8rem;padding:3rem 1.8rem}
+      .proj-header{flex-direction:column;align-items:flex-start;gap:1.2rem}
+    }
+    @media(max-width:560px){
+      .proj-grid{grid-template-columns:1fr}
+      .sg{grid-template-columns:1fr}
+      .stats{grid-template-columns:1fr 1fr}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="LOGO.png" alt="N"/>
+    <span class="nav-name">Najat Ibrahim</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="mailto:ibrahim.najat@dnsc.edu.ph" class="btn" style="padding:0.45rem 1.2rem;font-size:0.72rem">Get in Touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-text fu">
+    <p class="hero-eyebrow">Graphic Designer · UI/UX · Visual Storyteller</p>
+    <h1 class="hero-title">
+      Design that<br>
+      <em>speaks</em><br>
+      before words do.
+    </h1>
+    <p class="hero-sub">
+      I craft visual identities, editorial layouts, and digital experiences that connect ideas with the people they're meant for.
+    </p>
+    <p class="hero-meta">
+      <span>BSIT 3rd Year</span>
+      <span class="dot"></span>
+      Davao del Norte State College
+      <span class="dot"></span>
+      <span>UI/UX @ Pink Hat Hackers</span>
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-fill">View My Work</a>
+      <a href="#about" class="btn">About Me</a>
+    </div>
+  </div>
+  <div class="hero-visual fu" style="transition-delay:.15s">
+    <div class="photo-outer">
+      <div class="photo-inner">
+        <img src="najii.png" alt="Najat Ibrahim"/>
+      </div>
+      <div class="bracket-br"></div>
+      <div class="photo-label">UI/UX Designer</div>
+      <div class="photo-glow"></div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="fu">
+    <p class="sec-label">About Me</p>
+    <h2 class="sec-title">A designer who<br><em>thinks in stories.</em></h2>
+    <div class="rule-short"></div>
+    <div class="about-text">
+      <p>Hello, I'm <strong>Najat Ibrahim</strong> — a 3rd year BSIT student at Davao del Norte State College with a deep love for graphic design and user experience. I believe purposeful design is the most elegant form of communication.</p>
+      <p>My work spans brand identity, poster design, promotional materials, and UI design. I served as the <strong>UI/UX Designer</strong> for SocioQuest, an AI-driven cybersecurity training platform built with my team, <strong>Pink Hat Hackers</strong>.</p>
+      <p>I design primarily in <strong>Figma</strong> and <strong>Canva</strong>, and build with <strong>VS Code</strong>. I'm always exploring the intersection where aesthetics and function become one.</p>
+    </div>
+  </div>
+  <div class="fu" style="transition-delay:.1s">
+    <div class="stats">
+      <div class="stat"><div class="stat-n">3rd</div><div class="stat-l">Year BSIT</div></div>
+      <div class="stat"><div class="stat-n">2</div><div class="stat-l">Certifications</div></div>
+      <div class="stat"><div class="stat-n">5+</div><div class="stat-l">Projects</div></div>
+      <div class="stat"><div class="stat-n">∞</div><div class="stat-l">Curiosity</div></div>
+    </div>
+    <p class="sec-label" style="margin-bottom:.8rem">Certifications</p>
+    <div class="certs">
+      <div class="cert">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-t">CCNA: Introduction to Networks</div>
+          <div class="cert-s">Cisco Networking Academy · Davao del Norte State College · Jun 2025</div>
+        </div>
+      </div>
+      <div class="cert">
+        <div class="cert-dot"></div>
+        <div>
+          <div class="cert-t">Ignite Philippines — Entrepreneurship</div>
+          <div class="cert-s">Wadhwani Foundation · Apr 30, 2026 · 42 hrs coursework</div>
+        </div>
+      </div>
+    </div>
+    <div class="edu">
+      <div class="edu-school">Davao del Norte State College</div>
+      <div class="edu-deg">Bachelor of Science in Information Technology</div>
+      <div class="edu-yr">3rd Year · BSIT-3H · 2022 – Present</div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="proj-header fu">
+    <div>
+      <p class="sec-label">Selected Work</p>
+      <h2 class="sec-title">Projects &amp; <em>Designs</em></h2>
+    </div>
+  </div>
+
+  <div class="proj-grid">
+    <!-- Poster -->
+    <div class="proj-card fu">
+      <div class="proj-thumb">
+        <img src="Poster SOCIOQUEST (3).png" alt="SocioQuest Poster"/>
+        <span class="proj-tag">Poster Design</span>
+        <div class="proj-overlay"><span class="ov-hint">View Project</span></div>
+      </div>
+      <div class="proj-info">
+        <p class="proj-name">SocioQuest Poster</p>
+        <p class="proj-desc">Campaign poster for the SocioQuest AI-Driven Cybersecurity Training Platform. Designed in Canva for our technopreneurship pitch.</p>
+      </div>
+    </div>
+
+    <!-- Brochure 1 -->
+    <div class="proj-card fu" style="transition-delay:.07s">
+      <div class="proj-thumb">
+        <img src="1.png" alt="Brochure Front"/>
+        <span class="proj-tag">Brochure</span>
+        <div class="proj-overlay"><span class="ov-hint">View Project</span></div>
+      </div>
+      <div class="proj-info">
+        <p class="proj-name">SocioQuest Brochure — Front</p>
+        <p class="proj-desc">Trifold brochure front panel featuring the About Us section, app mockup, and contact information. Designed in Canva.</p>
+      </div>
+    </div>
+
+    <!-- Brochure 2 -->
+    <div class="proj-card fu" style="transition-delay:.14s">
+      <div class="proj-thumb">
+        <img src="2.png" alt="Brochure Back"/>
+        <span class="proj-tag">Brochure</span>
+        <div class="proj-overlay"><span class="ov-hint">View Project</span></div>
+      </div>
+      <div class="proj-info">
+        <p class="proj-name">SocioQuest Brochure — Back</p>
+        <p class="proj-desc">Back panel highlighting services, why choose SocioQuest, and team profiles. Typography-led layout.</p>
+      </div>
+    </div>
+
+    <!-- Logo -->
+    <div class="proj-card fu" style="transition-delay:.04s">
+      <div class="proj-thumb" style="background:#0c0709">
+        <img src="PINK HAT.png" alt="Pink Hat Hackers Logo" style="object-fit:contain;padding:1.2rem"/>
+        <span class="proj-tag">Logo Design</span>
+        <div class="proj-overlay"><span class="ov-hint">View Project</span></div>
+      </div>
+      <div class="proj-info">
+        <p class="proj-name">Pink Hat Hackers Logo</p>
+        <p class="proj-desc">Team logo for Pink Hat Hackers — bold, edgy brand identity designed for our cybersecurity tech startup.</p>
+      </div>
+    </div>
+
+    <!-- Video 1 -->
+    <div class="proj-card fu" style="transition-delay:.11s">
+      <div class="proj-thumb">
+        <video muted loop playsinline
+          onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0">
+          <source src="SocioQuest_Promo_VIs.mp4" type="video/mp4"/>
+        </video>
+        <div class="play-ring">
+          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <span class="proj-tag">Motion · Video</span>
+        <div class="proj-overlay"><span class="ov-hint">Hover to Play</span></div>
+      </div>
+      <div class="proj-info">
+        <p class="proj-name">SocioQuest Promo VI</p>
+        <p class="proj-desc">Visual identity motion piece edited for the SocioQuest technopreneurship presentation.</p>
+      </div>
+    </div>
+
+    <!-- Video 2 -->
+    <div class="proj-card fu" style="transition-delay:.18s">
+      <div class="proj-thumb">
+        <video muted loop playsinline
+          onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0">
+          <source src="Black_and_Pink_Neon_Coming_Soon_Video.mp4" type="video/mp4"/>
+        </video>
+        <div class="play-ring">
+          <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <span class="proj-tag">Motion · Video</span>
+        <div class="proj-overlay"><span class="ov-hint">Hover to Play</span></div>
+      </div>
+      <div class="proj-info">
+        <p class="proj-name">Coming Soon Teaser</p>
+        <p class="proj-desc">Black and pink neon coming soon video — brand teaser for the SocioQuest launch campaign.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="rule"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="skills-wrap">
+    <div>
+      <p class="sec-label fu">Expertise</p>
+      <h2 class="sec-title fu">What I <em>bring</em><br>to every project</h2>
+      <div class="rule-short fu"></div>
+      <div class="sg fu" style="transition-delay:.08s">
+        <div class="sc">
+          <h3 class="sc-title">Design</h3>
+          <ul class="sc-list">
+            <li>Graphic Design</li><li>UI / UX Design</li>
+            <li>Brand Identity</li><li>Poster & Print</li>
+          </ul>
+        </div>
+        <div class="sc">
+          <h3 class="sc-title">Visual</h3>
+          <ul class="sc-list">
+            <li>Layout & Typography</li><li>Color Theory</li>
+            <li>Video Editing</li><li>Motion Graphics</li>
+          </ul>
+        </div>
+        <div class="sc">
+          <h3 class="sc-title">Tech</h3>
+          <ul class="sc-list">
+            <li>HTML / CSS</li><li>VS Code</li>
+            <li>Basic Networking</li><li>CCNA Foundations</li>
+          </ul>
+        </div>
+        <div class="sc">
+          <h3 class="sc-title">Soft Skills</h3>
+          <ul class="sc-list">
+            <li>Creative Direction</li><li>Collaboration</li>
+            <li>Entrepreneurship</li><li>Problem Solving</li>
+          </ul>
+        </div>
+      </div>
+      <p class="tools-lbl fu" style="transition-delay:.12s">Tools</p>
+      <div class="tools fu" style="transition-delay:.14s">
+        <span class="pill">Figma</span>
+        <span class="pill">Canva</span>
+        <span class="pill">VS Code</span>
+        <span class="pill">Canva Video</span>
+      </div>
+    </div>
+
+    <div class="fu" style="transition-delay:.16s">
+      <p class="sec-label" style="margin-bottom:.8rem">Featured Project</p>
+      <div class="cp-card">
+        <p class="cp-title">SocioQuest</p>
+        <p class="cp-role">UI/UX Designer · Pink Hat Hackers · BSIT-3H</p>
+        <p class="cp-body">An AI-driven cybersecurity training platform that helps organizations train employees through realistic simulations. I led the full visual identity — logo, brochures, posters, UI design, and promotional videos — for our technopreneurship capstone.</p>
+      </div>
+      <div style="margin-top:1.4rem;padding:1.6rem;background:var(--surface2);border:1px solid var(--border)">
+        <p class="sec-label" style="margin-bottom:0.9rem">About the Designer</p>
+        <p style="font-family:var(--serif);font-size:1rem;color:var(--cream);font-style:italic;line-height:1.7;opacity:0.8">
+          "Good design is not just how it looks — it's how it makes someone feel before they read a single word."
+        </p>
+        <p style="font-size:0.74rem;color:var(--muted);margin-top:0.6rem">— Najat Ibrahim</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="ft-name">Najat Ibrahim</div>
+    <div class="ft-tag">UI/UX Designer · Graphic Designer · BSIT Student</div>
+    <div class="ft-copy">© 2026 · Davao del Norte State College · BSIT-3H</div>
+  </div>
+  <a href="mailto:ibrahim.najat@dnsc.edu.ph" class="ft-email">ibrahim.najat@dnsc.edu.ph</a>
+</footer>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); }
+  });
+},{threshold:0.1});
+document.querySelectorAll('.fu').forEach(el => obs.observe(el));
+document.querySelectorAll('.hero .fu').forEach((el,i) => {
+  setTimeout(() => el.classList.add('vis'), 80 + i*160);
+});
+</script>
+</body>
+</html>
